@@ -7,7 +7,8 @@ import {
   Box, 
   Divider,
   ThemeProvider,
-  createTheme 
+  createTheme,
+  Grid
 } from '@mui/material';
 import { 
   Search, 
@@ -15,32 +16,58 @@ import {
   Lock, 
   Mail,
   CloudSun,
-  CalendarCheck,
-  WifiOff
+  CalendarCheck
 } from 'lucide-react';
 
 const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920,
+  typography: {
+    fontFamily: 'Poppins, Arial, sans-serif',
+  },
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          marginBottom: '16px',
+        },
+      },
     },
   },
 });
 
-const PrivacyPolicy = () => {
-  const sectionStyle = {
-    display: 'flex', 
-    alignItems: 'center', 
-    gap: 2,
-    marginBottom: 3,
-    borderBottom: `2px solid ${theme.palette.primary.light}`,
-    paddingBottom: 1
-  };
+const PrivacyPolicySection = ({ icon: Icon, title, children }) => (
+  <Box sx={{ mb: 4 }}>
+    <Grid container alignItems="center" sx={{ mb: 2 }}>
+      <Grid item sx={{ mr: 2 }}>
+        <Icon color="#1976d2" size={32} />
+      </Grid>
+      <Grid item xs>
+        <Typography 
+          variant="h5" 
+          color="primary" 
+          sx={{ 
+            fontWeight: 600,
+            borderBottom: '2px solid #1976d2',
+            paddingBottom: 1 
+          }}
+        >
+          {title}
+        </Typography>
+      </Grid>
+    </Grid>
+    <Paper 
+      elevation={0} 
+      sx={{ 
+        p: 3, 
+        bgcolor: 'rgba(25, 118, 210, 0.04)', 
+        borderRadius: 2 
+      }}
+    >
+      {children}
+    </Paper>
+  </Box>
+);
 
+const PrivacyPolicy = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container 
@@ -56,87 +83,162 @@ const PrivacyPolicy = () => {
         <Paper 
           elevation={12} 
           sx={{ 
-            p: { xs: 2, sm: 4 }, 
+            p: { xs: 3, sm: 5 }, 
             borderRadius: 4,
-            background: 'rgba(255, 255, 255, 0.9)',
-            boxShadow: '0 12px 24px rgba(0,0,0,0.1)',
-            border: `1px solid ${theme.palette.primary.light}`
+            background: 'white',
+            boxShadow: '0 15px 30px rgba(0,0,0,0.08)'
           }}
         >
+          {/* Header */}
           <Box sx={{ textAlign: 'center', mb: 4 }}>
-            <CloudSun size={64} color="#1976d2" strokeWidth={1.5} />
+            <CloudSun 
+              size={64} 
+              color="#1976d2" 
+              strokeWidth={1.5} 
+              style={{ marginBottom: 16 }} 
+            />
             <Typography 
               variant="h3" 
               component="h1" 
               color="primary" 
-              sx={{ fontWeight: 700 }}
-              gutterBottom
+              sx={{ 
+                fontWeight: 700,
+                mb: 1
+              }}
             >
               TaskWeatherSync
             </Typography>
-            <Typography variant="h5" color="textSecondary" sx={{ fontWeight: 300 }}>
+            <Typography 
+              variant="h5" 
+              color="textSecondary"
+              sx={{ 
+                fontWeight: 300,
+                mb: 1
+              }}
+            >
               Privacy Policy
             </Typography>
-            <Typography variant="subtitle1" color="textSecondary" sx={{ mt: 1 }}>
-              Last Updated: March 2025
+            <Typography 
+              variant="subtitle1" 
+              color="textSecondary"
+              sx={{ 
+                fontStyle: 'italic',
+                color: '#666'
+              }}
+            >
+              Protecting Your Agricultural Data
             </Typography>
           </Box>
 
-          <Divider sx={{ my: 3, borderColor: 'primary.light' }} />
+          <Divider sx={{ my: 3 }} />
 
-          {/* Information We Collect */}
-          <Box sx={sectionStyle}>
-            <Search color="#1976d2" size={32} />
-            <Typography variant="h5" color="primary">
-              Information We Collect
+          {/* Information Collection */}
+          <PrivacyPolicySection 
+            icon={Search} 
+            title="What We Collect"
+          >
+            <Typography variant="body1" paragraph>
+              We collect essential information to enhance your farming experience:
             </Typography>
-          </Box>
-          <Typography paragraph>
-            - <strong>Device ID</strong> – Used for task scheduling and to track active users. Inactive device records may be removed to keep the database optimized.
-            <br/>- <strong>Location Data</strong> – The app focuses only on municipalities in **Sorsogon** to provide precise weather-based task recommendations for coconut farming.
-            <br/>- <strong>Offline Data Storage</strong> – Task-related data may be temporarily stored on your device to ensure the app functions without an internet connection.
-          </Typography>
+            <Box component="ul" sx={{ 
+              pl: 3, 
+              '& li': { 
+                mb: 2,
+                lineHeight: 1.6
+              } 
+            }}>
+              <li>
+                <strong>Device ID</strong>: Helps us manage task scheduling and maintain an efficient database.
+              </li>
+              <li>
+                <strong>Location Data</strong>: Focused on Sorsogon municipalities to provide precise coconut farming tasks recommendations.
+              </li>
+              <li>
+                <strong>Offline Data</strong>: Ensures access to farming insights, even without internet.
+              </li>
+            </Box>
+          </PrivacyPolicySection>
 
           {/* Data Usage */}
-          <Box sx={sectionStyle}>
-            <CalendarCheck color="#1976d2" size={32} />
-            <Typography variant="h5" color="primary">
-              Task Scheduling & Offline Access
+          <PrivacyPolicySection 
+            icon={CalendarCheck} 
+            title="How We Use Your Data"
+          >
+            <Typography variant="body1" paragraph>
+              We transform data into actionable agricultural intelligence:
             </Typography>
-          </Box>
-          <Typography paragraph>
-            - **Task Scheduling**: Your **device ID** enables the app to schedule and manage tasks based on the selected municipality.
-            <br/>- **Offline Mode**: The app stores essential data locally, allowing users to access weather-based task recommendations even without an internet connection. Data syncs automatically once connectivity is restored.
-          </Typography>
+            <Box component="ul" sx={{ 
+              pl: 3, 
+              '& li': { 
+                mb: 2,
+                lineHeight: 1.6
+              } 
+            }}>
+              <li>
+                <strong>Smart Scheduling</strong>: Weather-based task management.
+              </li>
+              <li>
+                <strong>Offline Access</strong>: Continuous farming insights, with or without connectivity.
+              </li>
+
+            </Box>
+          </PrivacyPolicySection>
 
           {/* Data Security */}
-          <Box sx={sectionStyle}>
-            <Shield color="#1976d2" size={32} />
-            <Typography variant="h5" color="primary">
-              Data Security
+          <PrivacyPolicySection 
+            icon={Shield} 
+            title="Data Protection"
+          >
+            <Typography variant="body1" paragraph>
+              We safeguard your information with utmost care:
             </Typography>
-          </Box>
-          <Typography paragraph>
-            Your data is protected with:
-            - Advanced encryption
-            - Secure storage solutions
-            - Compliance with industry standards
-          </Typography>
+            <Box component="ul" sx={{ 
+              pl: 3, 
+              '& li': { 
+                mb: 2,
+                lineHeight: 1.6
+              } 
+            }}>
+              <li>
+                <strong>Encryption</strong>: Protection for your data.
+              </li>
+              <li>
+                <strong>Secure Storage</strong>: Information stored with security.
+              </li>
+              <li>
+                <strong>Compliance</strong>: Meeting and exceeding industry standards.
+              </li>
+            </Box>
+          </PrivacyPolicySection>
 
           {/* Contact */}
-          <Box sx={sectionStyle}>
-            <Mail color="#1976d2" size={32} />
-            <Typography variant="h5" color="primary">
-              Contact Us
+          <PrivacyPolicySection 
+            icon={Mail} 
+            title="Contact Us"
+          >
+            <Typography variant="body1" align="center" paragraph>
+              Have questions or concerns?
             </Typography>
-          </Box>
-          <Typography paragraph>
-            For inquiries, reach out to:
-            <br/><strong>Email:</strong> ricardohermoginojr@gmail.com
-          </Typography>
+            <Typography 
+              variant="h6" 
+              color="primary" 
+              align="center"
+              sx={{ 
+                fontWeight: 600,
+                mb: 2
+              }}
+            >
+              ricardohermoginojr@gmail.com
+            </Typography>
+          </PrivacyPolicySection>
 
-          <Divider sx={{ my: 3, borderColor: 'primary.light' }} />
-          <Typography variant="body2" color="textSecondary" align="center">
+          <Divider sx={{ my: 3 }} />
+
+          <Typography 
+            variant="body2" 
+            color="textSecondary" 
+            align="center"
+          >
             © 2025 TaskWeatherSync. All Rights Reserved.
           </Typography>
         </Paper>
