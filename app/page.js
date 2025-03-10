@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React from "react";
 import { 
   Container, 
   Typography, 
@@ -9,7 +9,7 @@ import {
   ThemeProvider,
   createTheme,
   Grid
-} from '@mui/material';
+} from "@mui/material";
 import { 
   Search, 
   Shield, 
@@ -17,17 +17,17 @@ import {
   Mail,
   CloudSun,
   CalendarCheck
-} from 'lucide-react';
+} from "lucide-react";
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'Poppins, Arial, sans-serif',
+    fontFamily: "Poppins, Arial, sans-serif",
   },
   components: {
     MuiTypography: {
       styleOverrides: {
         root: {
-          marginBottom: '16px',
+          marginBottom: "16px",
         },
       },
     },
@@ -46,7 +46,7 @@ const PrivacyPolicySection = ({ icon: Icon, title, children }) => (
           color="primary" 
           sx={{ 
             fontWeight: 600,
-            borderBottom: '2px solid #1976d2',
+            borderBottom: "2px solid #1976d2",
             paddingBottom: 1 
           }}
         >
@@ -58,7 +58,7 @@ const PrivacyPolicySection = ({ icon: Icon, title, children }) => (
       elevation={0} 
       sx={{ 
         p: 3, 
-        bgcolor: 'rgba(25, 118, 210, 0.04)', 
+        bgcolor: "rgba(25, 118, 210, 0.04)", 
         borderRadius: 2 
       }}
     >
@@ -74,10 +74,10 @@ const PrivacyPolicy = () => {
         maxWidth="md" 
         sx={{ 
           py: 4,
-          background: 'linear-gradient(135deg, #e6f2ff 0%, #ffffff 100%)',
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center'
+          background: "linear-gradient(135deg, #e6f2ff 0%, #ffffff 100%)",
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center"
         }}
       >
         <Paper 
@@ -85,12 +85,12 @@ const PrivacyPolicy = () => {
           sx={{ 
             p: { xs: 3, sm: 5 }, 
             borderRadius: 4,
-            background: 'white',
-            boxShadow: '0 15px 30px rgba(0,0,0,0.08)'
+            background: "white",
+            boxShadow: "0 15px 30px rgba(0,0,0,0.08)"
           }}
         >
           {/* Header */}
-          <Box sx={{ textAlign: 'center', mb: 4 }}>
+          <Box sx={{ textAlign: "center", mb: 4 }}>
             <CloudSun 
               size={64} 
               color="#1976d2" 
@@ -122,8 +122,8 @@ const PrivacyPolicy = () => {
               variant="subtitle1" 
               color="textSecondary"
               sx={{ 
-                fontStyle: 'italic',
-                color: '#666'
+                fontStyle: "italic",
+                color: "#666"
               }}
             >
               Protecting Your Agricultural Data
@@ -132,17 +132,25 @@ const PrivacyPolicy = () => {
 
           <Divider sx={{ my: 3 }} />
 
-          {/* Information Collection */}
+          {/* Introduction */}
+          <Typography variant="body1" paragraph>
+            <strong>TaskWeatherSync</strong> is an independent academic project developed by IT students from 
+            <strong> The Lewis College</strong> as part of our capstone requirement. This app is <strong>not affiliated with any government entity.</strong> 
+            It provides information from <strong>OpenWeatherMap (Free 5-Day Forecast API)</strong> for educational and planning purposes, specifically to assist 
+            coconut farmers in Sorsogon with weather-based task recommendations.
+          </Typography>
+
+          {/* What We Collect */}
           <PrivacyPolicySection 
             icon={Search} 
             title="What We Collect"
           >
             <Typography variant="body1" paragraph>
-              We collect essential information to enhance your farming experience:
+              We collect essential data to enhance your farming experience:
             </Typography>
             <Box component="ul" sx={{ 
               pl: 3, 
-              '& li': { 
+              "& li": { 
                 mb: 2,
                 lineHeight: 1.6
               } 
@@ -151,7 +159,8 @@ const PrivacyPolicy = () => {
                 <strong>Device ID</strong>: Helps us manage task scheduling and maintain an efficient database.
               </li>
               <li>
-                <strong>Location Data</strong>: Focused on Sorsogon municipalities to provide precise coconut farming tasks recommendations.
+                <strong>User-Selected Location Data</strong>: Users manually select a municipality from a dropdown menu to check weather conditions. 
+                The app <strong>does not request or track real-time GPS location.</strong>
               </li>
               <li>
                 <strong>Offline Data</strong>: Ensures access to farming insights, even without internet.
@@ -169,18 +178,17 @@ const PrivacyPolicy = () => {
             </Typography>
             <Box component="ul" sx={{ 
               pl: 3, 
-              '& li': { 
+              "& li": { 
                 mb: 2,
                 lineHeight: 1.6
               } 
             }}>
               <li>
-                <strong>Smart Scheduling</strong>: Weather-based task management.
+                <strong>Smart Scheduling</strong>: The selected municipality’s weather data is used to determine the best times for farming tasks.
               </li>
               <li>
                 <strong>Offline Access</strong>: Continuous farming insights, with or without connectivity.
               </li>
-
             </Box>
           </PrivacyPolicySection>
 
@@ -194,7 +202,7 @@ const PrivacyPolicy = () => {
             </Typography>
             <Box component="ul" sx={{ 
               pl: 3, 
-              '& li': { 
+              "& li": { 
                 mb: 2,
                 lineHeight: 1.6
               } 
